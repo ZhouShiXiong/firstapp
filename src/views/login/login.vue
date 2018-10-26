@@ -10,7 +10,7 @@
             icon="question"
             placeholder="请输入用户名"
             bind:click-icon="onClickIcon"
-            
+
         />
         <van-field
             v-model="password"
@@ -23,11 +23,11 @@
         <div class="button">
             <div>  <van-button  type="warning" @click="signup">注册</van-button></div>
             <div><van-button type="danger" @click="login" >登录</van-button></div>
-          
-        
+
+
 
         </div>
-        
+
   </div>
 </template>
 
@@ -51,14 +51,24 @@ export default {
   },
   methods:{
       signup(){
-          console.log('111')
+        const userinfo={'username':this.username,'password':this.password}
+        this.$store.dispatch('LoginSignup', userinfo).then(()=>{
+          console.log('回到了这');
+          this.$router.push('/login')
+        }).catch(()=>{
+          console.log('wrong');
+        })
       },
       login(){
           const userinfo={'username':this.username,'password':this.password}
-          this.$store.dispatch('LoginByUsername', userinfo)
-          console.log(userinfo)
+          this.$store.dispatch('LoginByUsername', userinfo).then(()=>{
+            console.log('回到了这');
+            this.$router.push('/')
+          }).catch(()=>{
+            console.log('wrong');
+          })
       }
-   
+
   }
 }
 </script>
@@ -70,10 +80,13 @@ export default {
     height:50vh;
     flex-direction: column;
     align-items: center;
-    justify-content: center    
+    justify-content: center
 }
 .aa{
     height: 5vh;
+}
+.content{
+  width: 80%
 }
 .title{
     font-size: 4vh
@@ -88,4 +101,3 @@ export default {
 
 
 </style>
-

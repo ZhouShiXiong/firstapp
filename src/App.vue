@@ -1,26 +1,63 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-      <router-link to="/login">登陆</router-link>
+    <div class="header">
+        <Header />
     </div>
-    <router-view/>
+    <div id="nav">
+
+      <router-view/>
+
+    </div>
+    <div class="footer">
+      <Footer />
+    </div>
   </div>
 </template>
+<script>
 
+  import Footer from './components/footer.vue'
+  import Header from './components/header.vue'
+  import { Tabbar, TabbarItem } from 'vant';
+  export default {
+    name: 'app',
+
+    components:{
+      [Tabbar.name]:Tabbar,
+      [TabbarItem.name]:TabbarItem,
+      Footer,Header
+
+    }
+  }
+
+
+</script>
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  width: 100%;
   color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  height: 100vh
 }
 #nav {
-  padding: 30px;
+  flex: 1;
+  overflow-y: scroll;
+  /* justify-content: center; */
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
-
+.header{
+  width: 100%;
+  height: 60px;
+  flex-shrink: 0;
+}
+.footer{
+  width: 100%;
+  height: 60px;
+  flex-shrink: 0;
+}
 #nav a {
   font-weight: bold;
   color: #2c3e50;
